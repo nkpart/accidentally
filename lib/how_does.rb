@@ -1,7 +1,7 @@
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
-require 'how_does/method_analyser'
+require 'how_does/method_invoker'
 
 module HowDoes
   VERSION = '0.0.1'
@@ -12,16 +12,21 @@ module HowDoes
     end
     
     def become result
-      meths = MethodAnalyser.new(@v).methods_by_arity[0]
-      meths.map { |m| 
+      meths = @v.methods
+      meths.select { |m|
+        m !~ /(should)|(assert)|(methods)/
+      }.map { |m| 
         [m, get_result(m)]
-      }.select { |m, r| r == result }.map { |m, r| m }
+      }.select { |m, r|
+        p [m, r] 
+        r == result 
+      }.map { |m, r| m }
     end
     
     def get_result(m)
-      @v.dup.send(m)
+      MethodInvoker.invoke(@v.dup, m)
     rescue
-      nil 
+      :FAILT
     end
   end
   
