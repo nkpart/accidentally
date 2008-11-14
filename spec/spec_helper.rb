@@ -12,5 +12,4 @@ include Test::Unit::Assertions
 
 $:.unshift(File.dirname(__FILE__) + '/../lib')
 require 'how_does'
-require 'how_does/method_analyser'
 require 'how_does/method_invoker'

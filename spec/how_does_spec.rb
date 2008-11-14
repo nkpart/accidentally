@@ -14,17 +14,10 @@ describe "HowDoes" do
   
   it "should figure out select" do
     m = HowDoes.how_does([1,false,2]).become([1,2])
-    assert m.include? "select"
+    assert m.include?("select")
   end
-  
 end
 
-describe HowDoes::MethodAnalyser do
-  it "should group methods for object by arity" do
-    r = HowDoes::MethodAnalyser.new([]).methods_by_arity[0] 
-    assert r.include?("size")
-  end
-end
 
 describe HowDoes::MethodInvoker do
   it "should invoke a simple no args method" do
