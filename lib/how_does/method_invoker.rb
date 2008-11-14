@@ -9,8 +9,7 @@ module HowDoes
     end
     
     def invoke meth
-      v = nil
-      warns = collect_warns {
+      v, warns = yield_and_collect_warns {
         begin
           v = @v.send(meth)          
         rescue LocalJumpError => e
@@ -22,13 +21,13 @@ module HowDoes
       v
     end
     
-    def collect_warns
+    def yield_and_collect_warns
       old_err = $stderr
-      new_err = StringIO.new
-      $stderr = new_err
-      yield
+      $stderr = StringIO.new
+      r = yield
+      warns = $stderr.string
       $stderr = old_err
-      new_err.string
+      [r, warns]
     end
   end
 end
