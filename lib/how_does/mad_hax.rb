@@ -23,7 +23,7 @@ module HowDoes
     end
   
     def get_result(o,m)
-      MethodInvoker.invoke(o.dup, m)
+      MethodInvoker.invoke(o, m)
     rescue
       :InvocationFail
     end

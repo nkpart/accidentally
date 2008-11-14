@@ -11,7 +11,7 @@ module HowDoes
     def invoke meth
       v, warns = yield_and_collect_warns {
         begin
-          x = @v.send(meth)
+          x = @v.dup.send(meth)
           if defined?(Enumerable::Enumerator) && x.is_a?(Enumerable::Enumerator) then
             invoke_block_method(meth)
           else 
@@ -27,7 +27,7 @@ module HowDoes
     
     def invoke_block_method m
       blk = proc { |x| x }
-      v= @v.send(m, &blk)
+      v= @v.dup.send(m, &blk)
     end
     
     def yield_and_collect_warns
