@@ -31,7 +31,7 @@ module HowDoes
       t = Thread.new {
         r = @v.dup.send(meth, &blk)
       }
-      t.join(5)
+      t.join(0.5)
       r
     end
     
