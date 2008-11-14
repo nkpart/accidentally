@@ -22,6 +22,7 @@ module HowDoes
     end
     
     def yield_and_collect_warns
+      # so many lol effects!
       old_err = $stderr
       $stderr = StringIO.new
       r = yield
@@ -29,5 +30,6 @@ module HowDoes
       $stderr = old_err
       [r, warns]
     end
+    
   end
 end
