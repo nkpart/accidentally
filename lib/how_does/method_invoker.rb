@@ -11,11 +11,11 @@ module HowDoes
     def invoke meth
       v, warns = yield_and_collect_warns {
         begin
-          v = @v.send(meth)
-          if v.is_a? Enumerable::Enumerator then
+          x = @v.send(meth)
+          if defined?(Enumerable::Enumerator) && x.is_a?(Enumerable::Enumerator) then
             invoke_block_method(meth)
           else 
-            v
+            x
           end   
         rescue LocalJumpError => e
           invoke_block_method(meth)
