@@ -27,6 +27,6 @@ describe HowDoes::MethodInvoker do
   
   it "should invoke a no args method that takes a block" do
     r = HowDoes::MethodInvoker.invoke [1], :select
-    assert_equal r, [1]    
+    assert_equal [1], r    
   end
 end
