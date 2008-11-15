@@ -33,6 +33,9 @@ describe HowDoes do
     m = HowDoes.how_does([1,2,3]).with(&b).become(6)
     assert m.include?("inject")
   end
+  
+  
+  
 end
 
 describe "Howdy Doodie using cool hash syntax" do
@@ -101,3 +104,21 @@ describe "Thread patches" do
     end.should == 5
   end
 end
+
+describe "Haskell ruby" do
+  it "should be let-like and in-ish" do
+    let(:foo => 5 ).in { foo }.should == 5
+  end
+  
+  it "should be mad" do
+    let(
+      :plus => proc { |a,b| a + b },
+      :times => proc { |a,b| a * b }
+    ).in {
+      times[5, plus[2, 3]]
+    }.should == 25
+  end
+  
+end
+
+
