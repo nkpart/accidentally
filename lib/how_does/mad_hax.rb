@@ -3,7 +3,7 @@ require 'how_does/invocation_fail_exception'
 module HowDoes
   module MadHax
 
-    @@blacklist = %w(daemonize display exec exit! fork sleep system syscall what?)
+    @@blacklist = %w(daemonize display exec exit! fork sleep system syscall what? ri)
 
     module_function
             
@@ -13,18 +13,18 @@ module HowDoes
       }
     end
   
-    def find_how original, target, args = []
+    def find_how original, target, args = [], &blk
       select_candidates(original.methods).map { |m| 
-        [m, get_result(original, m, args)]
+        [m, get_result(original, m, args, &blk)]
       }.select { |m, r|
         r == target
       }.map { |m, r| 
-        m 
-      }
+        m
+      } 
     end
   
-    def get_result(o,m, args)
-      MethodInvoker.invoke(o, m, args)
+    def get_result(o,m, args, &blk)
+      MethodInvoker.invoke(o, m, args, &blk)
     rescue Exception => e
       InvocationFailException.new(e)
     end

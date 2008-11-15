@@ -27,6 +27,12 @@ describe HowDoes do
     methods = how_does([:a, :b, :c]).with(:b).become(1)
     assert methods.include?("index")
   end
+  
+  it "should be able to take a block suggestion" do
+    b = proc { |a,b| a + b }
+    m = HowDoes.how_does([1,2,3]).with(&b).become(6)
+    assert m.include?("inject")
+  end
 end
 
 describe "Howdy Doodie using cool hash syntax" do

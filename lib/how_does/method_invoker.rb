@@ -4,17 +4,17 @@ require 'how_does/patches/thread'
 
 module HowDoes
   class MethodInvoker
-    def self.invoke v, meth, args
-      self.new(v).invoke(meth, args)
+    def self.invoke v, meth, args, &blk
+      self.new(v).invoke(meth, args, &blk)
     end
       
     def initialize v
       @v = v
     end
     
-    def invoke meth, args
+    def invoke meth, args, &blk
       v, warns = yield_and_collect_stderr {
-        invocation_result, fail = either { do_send(meth, args) }
+        invocation_result, fail = either { do_send(meth, args, &blk) }
         if should_do_block_execute(invocation_result, fail) then
           invoke_block_method(meth, args)
         else
