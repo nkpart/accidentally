@@ -84,21 +84,6 @@ describe HowDoes::MethodInvoker do
 end
 
 describe "Kernel patches" do
-  it "should have a better exception control mechanism" do
-    my_fail = RuntimeError.new('fail test')
-    res, ex = either {
-      raise my_fail
-    }
-    res.should be_nil
-    ex.should == my_fail
-    
-    res, ex = either {
-      5
-    }
-    res.should == 5
-    ex.should be_nil
-  end
-  
   it "should collect warns" do
     a, warns = yield_and_collect_stderr {
       warn "fail"
