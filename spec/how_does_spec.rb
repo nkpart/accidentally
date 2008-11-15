@@ -7,7 +7,7 @@ describe HowDoes do
     methods = how_does("dog").become(3)
     assert methods.include?("length")
   end
-  
+
   it "should figure out array reversal" do
     methods = how_does([1, 2]).become([2, 1])
     assert methods.include?("reverse")
@@ -33,32 +33,43 @@ describe HowDoes do
     assert methods.include?("slice")
   end
 
+  it "should figure out length of an array even using an empty with" do
+    methods = how_does("dog").with().become(3)
+    assert methods.include?("length")
+  end
+  
   it "should be able to take a block suggestion" do
     b = proc { |a, b| a + b }
     m = HowDoes.how_does([1, 2, 3]).with(&b).become(6)
     assert m.include?("inject")
   end
-  
-  
-  
 end
 
-describe "Howdy Doodie using cool hash syntax" do
-  it "should figure out length of an array when there are no method arguments" do
-    methods = howdy_doodie "dog" => 3
+describe "Object with how_does monkey patch" do
+  it "should figure out length of an array" do
+    methods = "dog".what.returns 3
     assert methods.include?("length")
   end
   
   it "should work for hashes too" do
-    methods = howdy_doodie({"dog" => 4} => 1)
+    methods = {"dog" => 4}.what.returns 1
     assert methods.include?("length")
   end
-end
 
-describe "hd" do
-  it "should be an alias of howdy_doodie" do
-    methods = hd "dog" => 3
-    assert methods.include?("length")    
+  it "should be able to be guided by a parameter" do
+    methods = [:a, :b, :c].what(:b).returns(1)
+    assert methods.include?("index")
+  end
+  
+  it "should be able to be guided by more than one parameter" do
+    methods = [:a, :b, :c, :d, :e].what(1, 2).returns([:b, :c])
+    assert methods.include?("slice")
+  end
+
+  it "should be able to take a block suggestion" do
+    b = proc { |a, b| a + b }
+    m = HowDoes.how_does([1, 2, 3]).with(&b).returns(6)
+    assert m.include?("inject")
   end
 end
 

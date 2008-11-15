@@ -1,6 +1,6 @@
 require 'how_does/patches/kernel'
 require 'how_does/patches/thread'
-
+require 'how_does/patches/object'
 
 module HowDoes
   class MethodInvoker

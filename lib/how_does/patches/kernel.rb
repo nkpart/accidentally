@@ -7,7 +7,6 @@ module Kernel
     [nil, e]
   end
   
-  
   def yield_and_collect_stderr
     # so many lol effects
     old_err = $stderr
@@ -36,7 +35,6 @@ module Kernel
         end
       end
     end
-    
     
     def initialize defines
       @defines = defines
