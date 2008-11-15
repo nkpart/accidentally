@@ -25,6 +25,4 @@ require 'newgem/tasks'
 Dir['tasks/**/*.rake'].each { |t| load t }
 
 task "build" => ["spec", "verify_rcov"]
-
-
 task :default => [:build]
