@@ -1,19 +1,20 @@
 require 'how_does/method_invoker'
-
+require 'how_does/invocation_fail_exception'
 module HowDoes
   module MadHax
-    module_function
+
     @@blacklist = %w(daemonize display exec exit! fork sleep system syscall what?)
-        
-    def filter_methods methods
+
+    module_function
+            
+    def select_candidates methods
       methods.select { |m|
         m !~ /(should)|(assert)|(methods)/ && !@@blacklist.include?(m)
       }
     end
   
     def find_how original, target
-      meths = original.methods
-      filter_methods(meths).map { |m| 
+      select_candidates(original.methods).map { |m| 
         [m, get_result(original, m)]
       }.select { |m, r|
         r == target
@@ -24,8 +25,8 @@ module HowDoes
   
     def get_result(o,m)
       MethodInvoker.invoke(o, m)
-    rescue
-      :InvocationFail
+    rescue Exception => e
+      InvocationFailException.new(e)
     end
   end
 end

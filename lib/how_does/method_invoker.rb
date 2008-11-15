@@ -1,3 +1,5 @@
+require 'how_does/patches/kernel'
+
 module HowDoes
   class MethodInvoker
     def self.invoke v, meth
@@ -11,18 +13,23 @@ module HowDoes
     def invoke meth
       v, warns = yield_and_collect_warns {
         begin
-          x = do_send(meth)
-          if defined?(Enumerable::Enumerator) && x.is_a?(Enumerable::Enumerator) then
+          invocation_result = do_send(meth)
+          if is_a_187_block_result(invocation_result) then
             invoke_block_method(meth)
           else 
-            x
+            invocation_result
           end   
         rescue LocalJumpError => e
           invoke_block_method(meth)
         end
       }
+      #TODO handle the warns
       p warns if !warns.empty?
       v
+    end
+    
+    def is_a_187_block_result x
+      defined?(Enumerable::Enumerator) && x.is_a?(Enumerable::Enumerator)
     end
     
     def do_send meth, &blk
@@ -37,7 +44,7 @@ module HowDoes
     
     def invoke_block_method m
       blk = proc { |x| x }
-      v= do_send(m, &blk)
+      do_send(m, &blk)
     end
     
     def yield_and_collect_warns
@@ -46,8 +53,9 @@ module HowDoes
       $stderr = StringIO.new
       r = yield
       warns = $stderr.string
-      $stderr = old_err
       [r, warns]
+    ensure
+      $stderr = old_err
     end
     
   end

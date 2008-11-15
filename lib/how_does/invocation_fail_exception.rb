@@ -1,0 +1,2 @@
+class InvocationFailException < Exception
+end

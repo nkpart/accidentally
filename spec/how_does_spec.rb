@@ -18,7 +18,6 @@ describe "HowDoes" do
   end
 end
 
-
 describe HowDoes::MethodInvoker do
   it "should invoke a simple no args method" do
     r = HowDoes::MethodInvoker.invoke [], :size
@@ -28,5 +27,22 @@ describe HowDoes::MethodInvoker do
   it "should invoke a no args method that takes a block" do
     r = HowDoes::MethodInvoker.invoke [1], :select
     assert_equal [1], r    
+  end
+end
+
+describe "Kernel patches" do
+  it "should have a better exception control mechanism" do
+    my_fail = RuntimeError.new('fail test')
+    res, ex = either {
+      raise my_fail
+    }
+    res.should be_nil
+    ex.should == my_fail
+    
+    res, ex = either {
+      5
+    }
+    res.should == 5
+    ex.should be_nil
   end
 end
