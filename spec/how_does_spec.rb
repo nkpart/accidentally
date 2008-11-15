@@ -45,4 +45,15 @@ describe "Kernel patches" do
     res.should == 5
     ex.should be_nil
   end
+  
+  it "should collect warns" do
+    a, warns = yield_and_collect_warns {
+      warn "fail"
+      warn "2"
+      5
+    }
+    
+    a.should == 5
+    warns.should == "fail\n2\n"
+  end
 end

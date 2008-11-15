@@ -12,15 +12,11 @@ module HowDoes
     
     def invoke meth
       v, warns = yield_and_collect_warns {
-        begin
-          invocation_result = do_send(meth)
-          if is_a_187_block_result(invocation_result) then
-            invoke_block_method(meth)
-          else 
-            invocation_result
-          end   
-        rescue LocalJumpError => e
+        invocation_result, fail = either { do_send(meth) }
+        if (fail && fail.is_a?(LocalJumpError)) || is_a_187_block_result(invocation_result) then
           invoke_block_method(meth)
+        else
+          invocation_result
         end
       }
       #TODO handle the warns
@@ -45,17 +41,6 @@ module HowDoes
     def invoke_block_method m
       blk = proc { |x| x }
       do_send(m, &blk)
-    end
-    
-    def yield_and_collect_warns
-      # so many lol effects
-      old_err = $stderr
-      $stderr = StringIO.new
-      r = yield
-      warns = $stderr.string
-      [r, warns]
-    ensure
-      $stderr = old_err
     end
     
   end
