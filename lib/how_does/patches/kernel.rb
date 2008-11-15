@@ -18,4 +18,29 @@ module Kernel
   ensure
     $stderr = old_err
   end
+  
+  class LetProxy
+    class Container
+      # TODO undefine a lot of shiz
+      def initialize defines
+        @defines = defines
+      end
+      
+      def method_missing sym,*args, &blk
+        @defines[sym]
+      end
+    end
+    
+    def initialize defines
+      @defines = defines
+    end
+    
+    def in &blk
+      Container.new(@defines).instance_eval &blk
+    end
+  end
+  
+  def let defines
+    LetProxy.new(defines)
+  end
 end

@@ -6,7 +6,7 @@ module HowDoes
   VERSION = '0.0.1'
 
   module_function
-  
+
   def how_does object
     Proxy.new object
   end
@@ -17,18 +17,18 @@ module HowDoes
   end
 
   alias :hd :howdy_doodie
-  
-  class Proxy
+
+  class Proxy #asdasd
     def initialize object
       @object = object
       @args = []
       @blk = nil
     end
-    
+
     def become result
       MadHax.find_how @object, result, @args, &@blk
     end
-    
+
     def with *args, &blk
       @args.concat args
       @blk = blk
