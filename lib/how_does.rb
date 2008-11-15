@@ -21,14 +21,16 @@ module HowDoes
     def initialize object
       @object = object
       @args = []
+      @blk = nil
     end
     
     def become result
-      MadHax.find_how @object, result, @args
+      MadHax.find_how @object, result, @args, &@blk
     end
     
-    def with *args
+    def with *args, &blk
       @args.concat args
+      @blk = blk
       self
     end
   end
