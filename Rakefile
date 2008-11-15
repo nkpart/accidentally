@@ -21,11 +21,10 @@ $hoe = Hoe.new('how_does', HowDoes::VERSION) do |p|
   p.rsync_args = '-av --delete --ignore-errors'
 end
 
-require 'newgem/tasks' # load /tasks/*.rake
+require 'newgem/tasks'
 Dir['tasks/**/*.rake'].each { |t| load t }
 
 task "build" => ["spec", "verify_rcov"]
 
 
-# TODO - want other tests/tasks run by default? Add them to the list
-# task :default => [:spec, :features]
+task :default => [:build]
