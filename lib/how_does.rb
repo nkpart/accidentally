@@ -9,7 +9,12 @@ module HowDoes
   module_function
   
   def how_does object
-    Proxy.new(object)
+    Proxy.new object
+  end
+
+  def howdy_doodie hash
+    key = hash.keys.first
+    Proxy.new(key).become(hash[key])
   end
   
   class Proxy
@@ -28,4 +33,3 @@ module HowDoes
     end
   end
 end
-

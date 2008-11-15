@@ -2,29 +2,41 @@ require File.dirname(__FILE__) + '/spec_helper.rb'
 
 describe "HowDoes" do
   it "should figure out length of an array" do
-    m = HowDoes.how_does("dog").become(3)
-    assert m.include?("length")
+    methods = HowDoes.how_does("dog").become(3)
+    assert methods.include?("length")
   end
   
   it "should figure out array reversal" do
-    m = HowDoes.how_does([1,2]).become([2,1])
-    assert m.include?("reverse")
+    methods = HowDoes.how_does([1,2]).become([2,1])
+    assert methods.include?("reverse")
   end
   
   it "should figure out select" do
-    m = HowDoes.how_does([1,false,2]).become([1,2])
-    assert m.include?("select")
+    methods = HowDoes.how_does([1,false,2]).become([1,2])
+    assert methods.include?("select")
   end
   
   it "should figure out index" do
-    m = HowDoes.how_does([:a, :b, :c]).become(:a)
-    assert m.include?("first")
+    methods = HowDoes.how_does([:a, :b, :c]).become(:a)
+    assert methods.include?("first")
   end
   
   it "should be able to be guided by a parameter" do
-    m = HowDoes.how_does([:a, :b, :c]).with(:b).become(1)
-    assert m.include?("index")
+    methods = HowDoes.how_does([:a, :b, :c]).with(:b).become(1)
+    assert methods.include?("index")
   end
+end
+
+describe "Howdy Doodie using cool hash syntax" do
+  it "should figure out length of an array when there are no method arguments" do
+    methods = HowDoes.howdy_doodie "dog" => 3
+    assert methods.include?("length")
+  end
+  
+  it "should work for hashes too" do
+    methods = HowDoes.howdy_doodie({"dog" => 4} => 1)
+    assert methods.include?("length")
+  end  
 end
 
 describe HowDoes::MethodInvoker do
