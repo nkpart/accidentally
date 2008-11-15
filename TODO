@@ -1,6 +1,4 @@
 * Do a fuzzy search. Methods that return things of the same type as the expected thing should be found.
 * Create a type to wrap the returned methods.
-* Make howdy_doodie work for finding methods with arguments somehow?
-  * hd ["dog", "a"] => 3 ???
-  * how_does("dog").withee
-* Ensure howdy_doodie supports blocks too.
+* Find a method which expects parameters even when we haven't supplied the arguments.
+  * Would need to knock up our own arguments in the MethodInvoker...
