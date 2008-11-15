@@ -1,4 +1,6 @@
 require 'how_does/patches/kernel'
+require 'how_does/patches/thread'
+
 
 module HowDoes
   class MethodInvoker
@@ -30,18 +32,9 @@ module HowDoes
     
     def do_send meth, &blk
       # Executing with timeout in case of endless methods, like Array#cycle in 1.8.7
-      execute_with_timeout {
+      Thread.execute_with_timeout {
         @v.dup.send(meth, &blk)
       }
-    end
-    
-    def execute_with_timeout(timeout = 0.5)
-      r = nil
-      t = Thread.new {
-        r = yield 
-      }
-      t.join(timeout)
-      r
     end
     
     def invoke_block_method m

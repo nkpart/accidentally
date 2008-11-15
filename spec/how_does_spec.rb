@@ -57,3 +57,12 @@ describe "Kernel patches" do
     warns.should == "fail\n2\n"
   end
 end
+
+
+describe "Thread patches" do
+  it "should execute with a timeout" do
+    Thread.execute_with_timeout(0.1) do
+      5
+    end.should == 5
+  end
+end
