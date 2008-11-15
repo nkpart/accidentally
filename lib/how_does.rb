@@ -13,27 +13,22 @@ module HowDoes
     Proxy.new object
   end
 
-  def howdy_doodie hash
-    key = hash.keys.first
-    Proxy.new(key).become(hash[key])
-  end
-
-  alias :hd :howdy_doodie
-
-  class Proxy #asdasd
+  class Proxy
     def initialize object
       @object = object
       @args = []
-      @blk = nil
+      @block = nil
     end
 
     def become result
-      MadHax.find_how @object, result, @args, &@blk
+      MadHax.find_how @object, result, @args, &@block
     end
 
-    def with *args, &blk
+    alias :== :become
+    
+    def with *args, &block
       @args.concat args
-      @blk = blk
+      @block = block
       self
     end
   end

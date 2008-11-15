@@ -3,7 +3,7 @@ require 'how_does/invocation_fail_exception'
 module HowDoes
   module MadHax
 
-    @@blacklist = %w(daemonize display exec exit! fork sleep system syscall what? ri)
+    @@blacklist = %w(daemonize display exec exit! fork sleep system syscall what? what ri)
 
     module_function
             
