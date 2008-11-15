@@ -48,4 +48,5 @@ module Kernel
   def let defines
     LetProxy.new(defines)
   end
+
 end

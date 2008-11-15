@@ -1,5 +1,7 @@
 $: << File.expand_path(File.dirname(__FILE__))
 
+gem 'prohax'
+require 'prohax'
 require 'how_does/mad_hax'
 
 module HowDoes
