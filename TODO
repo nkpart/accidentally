@@ -1,3 +1,4 @@
 * Do a fuzzy search. Methods that return things of the same type as the expected thing should be found.
-* Create a type to wrap the returned method.
-* Make howdy_doodie work for finding methods with arguments somehow.
+* Create a type to wrap the returned methods.
+* Make howdy_doodie work for finding methods with arguments somehow?
+  * hd ["dog", "a"] => 3 ???

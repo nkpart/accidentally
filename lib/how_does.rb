@@ -16,6 +16,8 @@ module HowDoes
     key = hash.keys.first
     Proxy.new(key).become(hash[key])
   end
+
+  alias :hd :howdy_doodie
   
   class Proxy
     def initialize object

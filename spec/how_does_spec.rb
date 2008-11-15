@@ -47,6 +47,13 @@ describe "Howdy Doodie using cool hash syntax" do
   end  
 end
 
+describe "hd" do
+  it "should be an alias of howdy_doodie" do
+    methods = hd "dog" => 3
+    assert methods.include?("length")    
+  end
+end
+
 describe HowDoes::MethodInvoker do
   it "should invoke a simple no args method" do
     r = MethodInvoker.invoke [], :size, []
