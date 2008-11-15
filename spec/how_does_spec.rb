@@ -16,16 +16,26 @@ describe "HowDoes" do
     m = HowDoes.how_does([1,false,2]).become([1,2])
     assert m.include?("select")
   end
+  
+  it "should figure out index" do
+    m = HowDoes.how_does([:a, :b, :c]).become(:a)
+    assert m.include?("first")
+  end
+  
+  it "should be able to be guided by a parameter" do
+    m = HowDoes.how_does([:a, :b, :c]).with(:b).become(1)
+    assert m.include?("index")
+  end
 end
 
 describe HowDoes::MethodInvoker do
   it "should invoke a simple no args method" do
-    r = HowDoes::MethodInvoker.invoke [], :size
+    r = HowDoes::MethodInvoker.invoke [], :size, []
     assert_equal 0, r
   end
   
   it "should invoke a no args method that takes a block" do
-    r = HowDoes::MethodInvoker.invoke [1], :select
+    r = HowDoes::MethodInvoker.invoke [1], :select, []
     assert_equal [1], r    
   end
 end
@@ -47,7 +57,7 @@ describe "Kernel patches" do
   end
   
   it "should collect warns" do
-    a, warns = yield_and_collect_warns {
+    a, warns = yield_and_collect_stderr {
       warn "fail"
       warn "2"
       5

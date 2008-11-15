@@ -13,9 +13,9 @@ module HowDoes
       }
     end
   
-    def find_how original, target
+    def find_how original, target, args = []
       select_candidates(original.methods).map { |m| 
-        [m, get_result(original, m)]
+        [m, get_result(original, m, args)]
       }.select { |m, r|
         r == target
       }.map { |m, r| 
@@ -23,8 +23,8 @@ module HowDoes
       }
     end
   
-    def get_result(o,m)
-      MethodInvoker.invoke(o, m)
+    def get_result(o,m, args)
+      MethodInvoker.invoke(o, m, args)
     rescue Exception => e
       InvocationFailException.new(e)
     end
