@@ -1,3 +1,5 @@
+1770 Captain Cook landed on the East coast of Australia.
+
 == 0.0.1 2008-11-12
 
 * 1 major enhancement:
