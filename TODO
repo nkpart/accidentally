@@ -2,3 +2,4 @@
 * Create a type to wrap the returned methods.
 * Make howdy_doodie work for finding methods with arguments somehow?
   * hd ["dog", "a"] => 3 ???
+* Ensure howdy_doodie supports blocks too.
