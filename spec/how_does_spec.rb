@@ -39,36 +39,34 @@ describe HowDoes do
   end
   
   it "should be able to take a block suggestion" do
-    b = proc { |a, b| a + b }
-    m = HowDoes.how_does([1, 2, 3]).with(&b).become(6)
+    m = how_does([1, 2, 3]).with{ |a, b| a + b }.become(6)
     assert m.include?("inject")
   end
 end
 
 describe "Object with how_does monkey patch" do
   it "should figure out length of an array" do
-    methods = "dog".what.returns 3
+    methods = "dog".what == 3
     assert methods.include?("length")
   end
   
   it "should work for hashes too" do
-    methods = {"dog" => 4}.what.returns 1
+    methods = {"dog" => 4}.what == 1
     assert methods.include?("length")
   end
 
   it "should be able to be guided by a parameter" do
-    methods = [:a, :b, :c].what(:b).returns(1)
+    methods = [:a, :b, :c].what(:b) == 1
     assert methods.include?("index")
   end
   
   it "should be able to be guided by more than one parameter" do
-    methods = [:a, :b, :c, :d, :e].what(1, 2).returns([:b, :c])
+    methods = [:a, :b, :c, :d, :e].what(1, 2) == [:b, :c]
     assert methods.include?("slice")
   end
 
   it "should be able to take a block suggestion" do
-    b = proc { |a, b| a + b }
-    m = HowDoes.how_does([1, 2, 3]).with(&b).returns(6)
+    m = [1, 2, 3].what{ |a, b| a + b } == 6
     assert m.include?("inject")
   end
 end

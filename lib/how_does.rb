@@ -22,7 +22,7 @@ module HowDoes
       MadHax.find_how @object, result, @args, &@block
     end
 
-    alias :returns :become
+    alias :== :become
     
     def with *args, &block
       @args.concat args
