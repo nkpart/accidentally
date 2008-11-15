@@ -111,14 +111,16 @@ describe "Haskell ruby" do
   end
   
   it "should be mad" do
+    x = 5
     let(
       :plus => proc { |a,b| a + b },
-      :times => proc { |a,b| a * b }
-    ).in {
-      times[5, plus[2, 3]]
-    }.should == 25
+      :times => proc { |a,b| a * b },
+      :five => proc { 5 },
+      :fast_five => 5
+    ).in { 
+      plus(x, times(five, plus(1, fast_five)))
+    }.should == 35
   end
-  
 end
 
 

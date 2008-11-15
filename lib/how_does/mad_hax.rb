@@ -14,12 +14,17 @@ module HowDoes
     end
   
     def find_how original, target, args = [], &blk
-      select_candidates(original.methods).map { |m| 
-        [m, get_result(original, m, args, &blk)]
-      }.select { |m, r|
-        r == target
-      }.map { |m, r| 
-        m
+      let(
+        :f => proc { |m| get_result(original, m, args, &blk) },
+        :candidates => proc { select_candidates(original.methods) }
+      ).in {
+        candidates.map { |m| 
+          [m, f(m)]
+        }.select { |m, r|
+          r == target
+        }.map { |m, r| 
+          m
+        }
       } 
     end
   
