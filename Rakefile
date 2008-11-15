@@ -24,5 +24,8 @@ end
 require 'newgem/tasks' # load /tasks/*.rake
 Dir['tasks/**/*.rake'].each { |t| load t }
 
+task "build" => ["spec", "verify_rcov"]
+
+
 # TODO - want other tests/tasks run by default? Add them to the list
 # task :default => [:spec, :features]
