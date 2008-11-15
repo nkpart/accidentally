@@ -28,9 +28,14 @@ describe HowDoes do
     assert methods.include?("index")
   end
   
+  it "should be able to be guided by more than one parameter" do
+    methods = how_does([:a, :b, :c, :d, :e]).with(1, 2).become([:b, :c])
+    assert methods.include?("slice")
+  end
+
   it "should be able to take a block suggestion" do
-    b = proc { |a,b| a + b }
-    m = HowDoes.how_does([1,2,3]).with(&b).become(6)
+    b = proc { |a, b| a + b }
+    m = HowDoes.how_does([1, 2, 3]).with(&b).become(6)
     assert m.include?("inject")
   end
 end
@@ -44,7 +49,7 @@ describe "Howdy Doodie using cool hash syntax" do
   it "should work for hashes too" do
     methods = howdy_doodie({"dog" => 4} => 1)
     assert methods.include?("length")
-  end  
+  end
 end
 
 describe "hd" do
