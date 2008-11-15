@@ -30,11 +30,17 @@ module HowDoes
     
     def do_send meth, &blk
       # Executing with timeout in case of endless methods, like Array#cycle in 1.8.7
+      execute_with_timeout {
+        @v.dup.send(meth, &blk)
+      }
+    end
+    
+    def execute_with_timeout(timeout = 0.5)
       r = nil
       t = Thread.new {
-        r = @v.dup.send(meth, &blk)
+        r = yield 
       }
-      t.join(0.5)
+      t.join(timeout)
       r
     end
     
