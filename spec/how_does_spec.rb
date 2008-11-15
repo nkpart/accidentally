@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/spec_helper.rb'
 
 describe "HowDoes" do
   it "should figure out length of an array" do
-    m = HowDoes.how_does("dog").become(3)    
+    m = HowDoes.how_does("dog").become(3)
     assert m.include?("length")
   end
   
