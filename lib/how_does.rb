@@ -15,10 +15,17 @@ module HowDoes
   class Proxy
     def initialize object
       @object = object
+      @args = []
     end
     
     def become result
-      MadHax.find_how @object, result
+      MadHax.find_how @object, result, @args
+    end
+    
+    def with *args
+      @args.concat args
+      self
     end
   end
 end
+
