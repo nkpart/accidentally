@@ -16,5 +16,5 @@ examples.split("\n").each do |example|
 end
 
 1.what == '1'
-
+[1,2,3].what(2) == [1,2]
 
