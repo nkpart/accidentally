@@ -29,11 +29,10 @@ module HowDoes
     
     def should_do_block_execute(invocation_result, fail)
       let(
-        :is_a_187_block_result => proc { |x| 
-          defined?(Enumerable::Enumerator) && x.is_a?(Enumerable::Enumerator) 
-        }
+        :is_a_187_block_result => proc { |x| defined?(Enumerable::Enumerator) && x.is_a?(Enumerable::Enumerator) },
+        :failed_because_no_block => proc { |fail| (fail && fail.is_a?(LocalJumpError)) }
       ).in {
-        (fail && fail.is_a?(LocalJumpError)) || is_a_187_block_result(invocation_result)
+        failed_because_no_block(fail) || is_a_187_block_result(invocation_result)
       }
     end
 

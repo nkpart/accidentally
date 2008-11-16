@@ -3,14 +3,12 @@ require 'how_does/method_invoker'
 module HowDoes
   module MadHax
 
-    @@blacklist = %w(daemonize display exec exit! fork sleep system syscall what? what ri)
+    @@blacklist = %w(daemonize display exec exit! fork sleep system syscall what? what ri something)
 
     module_function
             
     def select_candidates methods
-      methods.select { |m|
-        m !~ /(should)|(assert)|(methods)/ && !@@blacklist.include?(m)
-      }
+      methods.select { |m| m !~ /(should)|(assert)|(methods)/ && !@@blacklist.include?(m)}
     end
   
     def find_how original, target, args = [], &blk

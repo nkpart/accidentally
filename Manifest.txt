@@ -19,7 +19,8 @@ coverage/lib-how_does-patches-kernel_rb.html
 coverage/lib-how_does-patches-object_rb.html
 coverage/lib-how_does-patches-thread_rb.html
 coverage/lib-how_does_rb.html
-examples/examples.rb
+etc/examples.rb
+etc/textmate_command.rb
 lib/how_does.rb
 lib/how_does/mad_hax.rb
 lib/how_does/method_invoker.rb
