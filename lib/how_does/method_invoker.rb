@@ -21,7 +21,7 @@ module HowDoes
           invocation_result
         end
       }
-      # TODO handle the warns
+      # TODO handle the warns            
       v
     end
     
@@ -39,7 +39,11 @@ module HowDoes
 
     def do_send meth, args, &blk
       # Executing with timeout in case of endless methods, like Array#cycle in 1.8.7
-      Thread.execute_with_timeout { @v.dup.send(meth, *args, &blk) } 
+      Thread.execute_with_timeout { dup(@v).send(meth, *args, &blk) } 
+    end
+    
+    def dup value
+      (value.is_a? Fixnum) ? value : value.dup
     end
     
     def invoke_block_method m, args

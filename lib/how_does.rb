@@ -1,5 +1,6 @@
 $: << File.expand_path(File.dirname(__FILE__))
 
+require 'rubygems'
 gem 'prohax'
 require 'prohax'
 require 'how_does/mad_hax'

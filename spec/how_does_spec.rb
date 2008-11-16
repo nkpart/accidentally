@@ -42,6 +42,11 @@ describe HowDoes do
     m = how_does([1, 2, 3]).with{ |a, b| a + b }.become(6)
     assert m.include?("inject")
   end
+  
+  it "should not fail for fixnums" do
+    m = how_does(1).become("1")
+    assert m.include?("to_s")
+  end
 end
 
 describe "Object with how_does monkey patch" do
