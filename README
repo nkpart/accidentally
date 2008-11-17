@@ -1,0 +1,21 @@
+= Accidently =
+
+== Usage ==
+
+> [1,2,3].accidently == 3
+ => ["last", "pop", "length", "size", "nitems", "max"]
+
+> [1,nil,3,5].accidently == [1,3,5]
+ => ["select", "compact", "compact!", "find_all"]
+
+> [:a, :b, :c].accidently(:b) == 1
+ => ["index", "rindex"]
+
+> [:a, :b, :c, :d].accidently(2,3) == [:c, :d]
+ => ["slice", "indexes", "values_at", "indices", "slice!", "[]"]
+
+> "abc".accidently(/\w/) == ["a","b","c"]
+ => ["scan"]
+
+> [1,2,3,4,5].accidently{|a,b| a + b} == 15
+ => ["inject"]

@@ -17,6 +17,5 @@ end
 
 1.accidently == '1'
 
-# [1,2,3].accidently(2) == [1,2]
-/tmp/temp_textmate.H86DVi:8: undefined method 
+[1,2,3].accidently(2) == [1,2]
 
