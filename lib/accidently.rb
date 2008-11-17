@@ -3,16 +3,16 @@ $: << File.expand_path(File.dirname(__FILE__))
 require 'rubygems'
 gem 'prohax'
 require 'prohax'
-require 'how_does/mad_hax'
+require 'accidently/mad_hax'
 
-module HowDoes
-  VERSION = '0.0.1'
-
-  module_function
-
-  def how_does object
-    Proxy.new object
+class Object
+  def accidently *args, &block
+    Accidently::Proxy.new(self).with(*args, &block)
   end
+end
+
+module Accidently
+  VERSION = '0.0.1'
 
   class Proxy
     def initialize object
@@ -21,12 +21,10 @@ module HowDoes
       @block = nil
     end
 
-    def become result
+    def == result
       MadHax.find_how @object, result, @args, &@block
     end
 
-    alias :== :become
-    
     def with *args, &block
       @args.concat args
       @block = block

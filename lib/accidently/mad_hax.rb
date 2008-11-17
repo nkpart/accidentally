@@ -1,9 +1,9 @@
-require 'how_does/method_invoker'
+require 'accidently/method_invoker'
 
-module HowDoes
+module Accidently
   module MadHax
 
-    @@blacklist = %w(daemonize display exec exit! fork sleep system syscall what? what ri something)
+    @@blacklist = %w(daemonize display exec exit! fork sleep system syscall what? what ri accidently)
 
     module_function
             

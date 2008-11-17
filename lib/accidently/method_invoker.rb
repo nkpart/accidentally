@@ -1,8 +1,7 @@
-require 'how_does/patches/kernel'
-require 'how_does/patches/thread'
-require 'how_does/patches/object'
+require 'accidently/patches/kernel'
+require 'accidently/patches/thread'
 
-module HowDoes
+module Accidently
   class MethodInvoker
     def self.invoke v, meth, args, &blk
       self.new(v).invoke(meth, args, &blk)

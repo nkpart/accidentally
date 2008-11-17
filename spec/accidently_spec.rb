@@ -1,82 +1,50 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-include HowDoes
+include Accidently
 
-describe HowDoes do
+describe Accidently do
   it "should figure out length of an array" do
-    methods = how_does("dog").become(3)
+    methods = "dog".accidently == 3
     assert methods.include?("length")
   end
 
   it "should figure out array reversal" do
-    methods = how_does([1, 2]).become([2, 1])
+    methods = [1, 2].accidently == [2, 1]
     assert methods.include?("reverse")
   end
   
   it "should figure out select" do
-    methods = how_does([1, false, 2]).become([1, 2])
+    methods = [1, false, 2].accidently == [1, 2]
     assert methods.include?("select")
   end
   
   it "should figure out index" do
-    methods = how_does([:a, :b, :c]).become(:a)
+    methods = [:a, :b, :c].accidently == :a
     assert methods.include?("first")
   end
   
   it "should be able to be guided by a parameter" do
-    methods = how_does([:a, :b, :c]).with(:b).become(1)
+    methods = [:a, :b, :c].accidently(:b) == 1
     assert methods.include?("index")
   end
   
   it "should be able to be guided by more than one parameter" do
-    methods = how_does([:a, :b, :c, :d, :e]).with(1, 2).become([:b, :c])
+    methods = [:a, :b, :c, :d, :e].accidently(1, 2) == [:b, :c]
     assert methods.include?("slice")
   end
 
-  it "should figure out length of an array even using an empty with" do
-    methods = how_does("dog").with().become(3)
-    assert methods.include?("length")
-  end
-  
   it "should be able to take a block suggestion" do
-    m = how_does([1, 2, 3]).with{ |a, b| a + b }.become(6)
+    m = [1, 2, 3].accidently{ |a, b| a + b } == 6
     assert m.include?("inject")
   end
   
   it "should not fail for fixnums" do
-    m = how_does(1).become("1")
+    m = 1.accidently == "1"
     assert m.include?("to_s")
   end
 end
 
-describe "Object with how_does monkey patch" do
-  it "should figure out length of an array" do
-    methods = "dog".what == 3
-    assert methods.include?("length")
-  end
-  
-  it "should work for hashes too" do
-    methods = {"dog" => 4}.what == 1
-    assert methods.include?("length")
-  end
-
-  it "should be able to be guided by a parameter" do
-    methods = [:a, :b, :c].what(:b) == 1
-    assert methods.include?("index")
-  end
-  
-  it "should be able to be guided by more than one parameter" do
-    methods = [:a, :b, :c, :d, :e].what(1, 2) == [:b, :c]
-    assert methods.include?("slice")
-  end
-
-  it "should be able to take a block suggestion" do
-    m = [1, 2, 3].what{ |a, b| a + b } == 6
-    assert m.include?("inject")
-  end
-end
-
-describe HowDoes::MethodInvoker do
+describe Accidently::MethodInvoker do
   it "should invoke a simple no args method" do
     r = MethodInvoker.invoke [], :size, []
     assert_equal 0, r
@@ -106,6 +74,10 @@ describe "Thread patches" do
     Thread.execute_with_timeout(0.1) do
       5
     end.should == 5
+  end
+  
+  it "should terminate early if longer than timeout" do
+    Thread.execute_with_timeout(0.1) do sleep(0.2); 1 end.should == nil
   end
 end
 
