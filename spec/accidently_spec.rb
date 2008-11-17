@@ -15,7 +15,7 @@ describe Accidently do
   
   it "should figure out select" do
     methods = [1, false, 2].accidently == [1, 2]
-    assert methods.include?("select")
+    assert methods.include?("select { |x| x }")
   end
   
   it "should figure out index" do

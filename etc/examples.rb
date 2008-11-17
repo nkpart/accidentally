@@ -1,12 +1,12 @@
-require '../lib/how_does'
+require '../lib/accidently'
 
 examples = <<EXAMPLES
-[1,2,3].something == 3
-[1,nil,3,5].something == [1,3,5]
-[:a, :b, :c].something(:b) == 1
-[:a, :b, :c, :d].something(2,3) == [:c, :d]
-"abc".something(/\\w/) == ["a","b","c"]
-[1,2,3,4,5].something{|a,b| a + b} == 15
+[1,2,3].accidently == 3
+[1,nil,3,5].accidently == [1,3,5]
+[:a, :b, :c].accidently(:b) == 1
+[:a, :b, :c, :d].accidently(2,3) == [:c, :d]
+"abc".accidently(/\\w/) == ["a","b","c"]
+[1,2,3,4,5].accidently{|a,b| a + b} == 15
 EXAMPLES
 
 examples.split("\n").each do |example|
@@ -15,9 +15,8 @@ examples.split("\n").each do |example|
   puts ""
 end
 
-1.something == '1'
+1.accidently == '1'
 
-[1,2,3].something(2) == [1,2]
-
-
+# [1,2,3].accidently(2) == [1,2]
+/tmp/temp_textmate.H86DVi:8: undefined method 
 

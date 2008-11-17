@@ -1,7 +1,9 @@
 require 'accidently/patches/kernel'
 require 'accidently/patches/thread'
 
-module Accidently
+class InvocationResult < Strucked.build(:result, :block_used); end
+  
+module Accidently  
   class MethodInvoker
     def self.invoke v, meth, args, &blk
       self.new(v).invoke(meth, args, &blk)
@@ -15,7 +17,7 @@ module Accidently
       v, warns = yield_and_collect_stderr {
         invocation_result, fail = either { do_send(meth, args, &blk) }
         if should_do_block_execute(invocation_result, fail) then
-          either { invoke_block_method(meth, args) }.compact.first
+          either { invoke_and_infer_block(meth, args) }.compact.first
         else
           invocation_result
         end
@@ -44,8 +46,9 @@ module Accidently
       (value.is_a? Fixnum) ? value : value.dup
     end
     
-    def invoke_block_method m, args
-      do_send(m, args) { |x| x }
+    def invoke_and_infer_block m, args
+      blk = proc { |x| x }
+      do_send(m, args, &blk)
     end
   end
 end
