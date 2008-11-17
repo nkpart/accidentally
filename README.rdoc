@@ -1,28 +1,36 @@
-= how_does
+= Accidently!
 
-* FIX (url)
+* http://github.com/nkpart/accidently
 
-== DESCRIPTION:
+== What?
 
-FIX (describe your package)
+Accidently helps you out when you know what you want to do something, but you can't remember the function name.
 
-== FEATURES/PROBLEMS:
+== Examples:
 
-* FIX (list of features or problems)
+> [1,2,3].accidently == 3
+ => ["last", "pop", "length", "size", "nitems", "max"]
 
-== SYNOPSIS:
+> [1,nil,3,5].accidently == [1,3,5]
+ => ["select", "compact", "compact!", "find_all"]
 
-  FIX (code sample of usage)
+> [:a, :b, :c].accidently(:b) == 1
+ => ["index", "rindex"]
 
-== REQUIREMENTS:
+> [:a, :b, :c, :d].accidently(2,3) == [:c, :d]
+ => ["slice", "indexes", "values_at", "indices", "slice!", "[]"]
 
-* FIX (list of requirements)
+> "abc".accidently(/\w/) == ["a","b","c"]
+ => ["scan"]
 
-== INSTALL:
+> [1,2,3,4,5].accidently{|a,b| a + b} == 15
+ => ["inject"]
 
-* FIX (sudo gem install, anything else)
+== Requirements
 
-== LICENSE:
+* prohax - http://github.com/nkpart/prohax
+
+== License
 
 (The MIT License)
 
