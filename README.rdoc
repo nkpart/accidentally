@@ -4,7 +4,16 @@
 
 == What?
 
-Accidently helps you out when you know what you want to do something, but you can't remember the function name.
+Accidently helps you out when you know what you want to do something, but you can't remember the function name
+
+== How
+
+$ sudo gem install nkpart-accidently
+$ irb
+
+>> require 'accidently'
+>> 1.accidently == '1'
+=> ["to_s", "inspect"]
 
 == Examples:
 
