@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{}
   s.email = ["nkpart@gmail.com"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc"]
-  s.files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc", "Rakefile", "TODO", "accidently.gemspec", "coverage/index.html", "coverage/lib-accidently-mad_hax_rb.html", "coverage/lib-accidently-method_invoker_rb.html", "coverage/lib-accidently-patches-kernel_rb.html", "coverage/lib-accidently-patches-thread_rb.html", "coverage/lib-accidently_rb.html", "etc/examples.rb", "etc/textmate_command.rb", "lib/accidently.rb", "lib/accidently/mad_hax.rb", "lib/accidently/method_invoker.rb", "lib/accidently/patches/kernel.rb", "lib/accidently/patches/thread.rb", "script/console", "script/destroy", "script/generate", "spec/accidently_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "tasks/rspec.rake"]
+  s.files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc", "Rakefile", "TODO", "accidently.gemspec", "etc/examples.rb", "etc/textmate_command.rb", "lib/accidently.rb", "lib/accidently/mad_hax.rb", "lib/accidently/method_invoker.rb", "lib/accidently/patches/kernel.rb", "lib/accidently/patches/thread.rb", "script/console", "script/destroy", "script/generate", "spec/accidently_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "tasks/rspec.rake"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/nkpart/accidently}
   s.post_install_message = %q{PostInstall.txt}

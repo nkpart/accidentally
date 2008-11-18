@@ -5,12 +5,6 @@ README.rdoc
 Rakefile
 TODO
 accidently.gemspec
-coverage/index.html
-coverage/lib-accidently-mad_hax_rb.html
-coverage/lib-accidently-method_invoker_rb.html
-coverage/lib-accidently-patches-kernel_rb.html
-coverage/lib-accidently-patches-thread_rb.html
-coverage/lib-accidently_rb.html
 etc/examples.rb
 etc/textmate_command.rb
 lib/accidently.rb
