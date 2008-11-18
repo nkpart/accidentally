@@ -1,7 +1,7 @@
 $: << File.expand_path(File.dirname(__FILE__))
 
 require 'rubygems'
-gem 'prohax'
+gem 'nkpart-prohax'
 require 'prohax'
 require 'accidently/mad_hax'
 

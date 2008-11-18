@@ -4,6 +4,7 @@ PostInstall.txt
 README.rdoc
 Rakefile
 TODO
+accidently.gemspec
 coverage/index.html
 coverage/lib-accidently-mad_hax_rb.html
 coverage/lib-accidently-method_invoker_rb.html
