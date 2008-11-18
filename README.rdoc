@@ -8,12 +8,12 @@ Accidently helps you out when you know what you want to do something, but you ca
 
 == How
 
-$ sudo gem install nkpart-accidently
-$ irb
+  $ sudo gem install nkpart-accidently
+  $ irb
 
->> require 'accidently'
->> 1.accidently == '1'
-=> ["to_s", "inspect"]
+  >> require 'accidently'
+  >> 1.accidently == '1'
+  => ["to_s", "inspect"]
 
 == Examples:
 
