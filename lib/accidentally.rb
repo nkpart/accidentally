@@ -3,15 +3,15 @@ $: << File.expand_path(File.dirname(__FILE__))
 require 'rubygems'
 gem 'nkpart-prohax'
 require 'prohax'
-require 'accidently/mad_hax'
+require 'accidentally/mad_hax'
 
 class Object
-  def accidently *args, &block
-    Accidently::Proxy.new(self).with(*args, &block)
+  def accidentally *args, &block
+    Accidentally::Proxy.new(self).with(*args, &block)
   end
 end
 
-module Accidently
+module Accidentally
   VERSION = '0.0.1'
 
   class Proxy

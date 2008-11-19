@@ -1,50 +1,50 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-include Accidently
+include Accidentally
 
-describe Accidently do
+describe Accidentally do
   it "should figure out length of an array" do
-    methods = "dog".accidently == 3
+    methods = "dog".accidentally == 3
     assert methods.include?("length")
   end
 
   it "should figure out array reversal" do
-    methods = [1, 2].accidently == [2, 1]
+    methods = [1, 2].accidentally == [2, 1]
     assert methods.include?("reverse")
   end
   
   it "should figure out select" do
-    methods = [1, false, 2].accidently == [1, 2]
+    methods = [1, false, 2].accidentally == [1, 2]
     assert methods.include?("select { |x| x }")
   end
   
   it "should figure out index" do
-    methods = [:a, :b, :c].accidently == :a
+    methods = [:a, :b, :c].accidentally == :a
     assert methods.include?("first")
   end
   
   it "should be able to be guided by a parameter" do
-    methods = [:a, :b, :c].accidently(:b) == 1
+    methods = [:a, :b, :c].accidentally(:b) == 1
     assert methods.include?("index")
   end
   
   it "should be able to be guided by more than one parameter" do
-    methods = [:a, :b, :c, :d, :e].accidently(1, 2) == [:b, :c]
+    methods = [:a, :b, :c, :d, :e].accidentally(1, 2) == [:b, :c]
     assert methods.include?("slice")
   end
 
   it "should be able to take a block suggestion" do
-    m = [1, 2, 3].accidently{ |a, b| a + b } == 6
+    m = [1, 2, 3].accidentally{ |a, b| a + b } == 6
     assert m.include?("inject")
   end
   
   it "should not fail for fixnums" do
-    m = 1.accidently == "1"
+    m = 1.accidentally == "1"
     assert m.include?("to_s")
   end
 end
 
-describe Accidently::MethodInvoker do
+describe Accidentally::MethodInvoker do
   it "should invoke a simple no args method" do
     r = MethodInvoker.invoke [], :size, []
     assert_equal 0, r

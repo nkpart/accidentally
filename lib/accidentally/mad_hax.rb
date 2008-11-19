@@ -1,9 +1,9 @@
-require 'accidently/method_invoker'
+require 'accidentally/method_invoker'
 
-module Accidently
+module Accidentally
   module MadHax
 
-    @@blacklist = %w(daemonize display exec exit! fork sleep system syscall what? what ri accidently)
+    @@blacklist = %w(daemonize display exec exit! fork sleep system syscall what? what ri accidentally accidently)
 
     module_function
             

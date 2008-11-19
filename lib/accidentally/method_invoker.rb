@@ -1,9 +1,9 @@
-require 'accidently/patches/kernel'
-require 'accidently/patches/thread'
+require 'accidentally/patches/kernel'
+require 'accidentally/patches/thread'
 
 class InvocationResult < Strucked.build(:result, :block_used); end
   
-module Accidently  
+module Accidentally  
   class MethodInvoker
     def self.invoke v, meth, args, &blk
       self.new(v).invoke(meth, args, &blk)
