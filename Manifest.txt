@@ -6,6 +6,7 @@ Rakefile
 TODO
 accidentally.gemspec
 coverage/index.html
+coverage/lib-accidentally-invocation_result_rb.html
 coverage/lib-accidentally-mad_hax_rb.html
 coverage/lib-accidentally-method_invoker_rb.html
 coverage/lib-accidentally-patches-kernel_rb.html
@@ -14,6 +15,7 @@ coverage/lib-accidentally_rb.html
 etc/examples.rb
 etc/textmate_command.rb
 lib/accidentally.rb
+lib/accidentally/invocation_result.rb
 lib/accidentally/mad_hax.rb
 lib/accidentally/method_invoker.rb
 lib/accidentally/patches/kernel.rb
@@ -22,6 +24,8 @@ script/console
 script/destroy
 script/generate
 spec/accidentally_spec.rb
+spec/invocation_result_spec.rb
+spec/method_invoker_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 tasks/rspec.rake

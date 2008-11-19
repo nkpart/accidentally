@@ -12,7 +12,7 @@ class Object
 end
 
 module Accidentally
-  VERSION = '0.0.1'
+  VERSION = '0.0.2'
 
   class Proxy
     def initialize object

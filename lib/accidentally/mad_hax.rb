@@ -16,7 +16,11 @@ module Accidentally
         :f => proc { |m| MethodInvoker.invoke(original, m, args, &blk) },
         :candidates => proc { select_candidates(original.methods) }
       ).in {
-        candidates.select { |m| f(m) == target }
+        candidates.inject([]) { |acc, m| 
+          v = f(m)
+          acc << "#{m}#{" " + v.block_used if v.block_used}" if v.result == target 
+          acc
+        }        
       } 
     end
   

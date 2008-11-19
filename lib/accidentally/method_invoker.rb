@@ -1,7 +1,6 @@
 require 'accidentally/patches/kernel'
 require 'accidentally/patches/thread'
-
-class InvocationResult < Strucked.build(:result, :block_used); end
+require 'accidentally/invocation_result'
   
 module Accidentally  
   class MethodInvoker
@@ -14,16 +13,19 @@ module Accidentally
     end
     
     def invoke meth, args, &blk
+      # TODO This look bad. Too many places where invocation results are getting built
+      # and failure happening.
       v, warns = yield_and_collect_stderr {
-        invocation_result, fail = either { do_send(meth, args, &blk) }
-        if should_do_block_execute(invocation_result, fail) then
-          either { invoke_and_infer_block(meth, args) }.compact.first
+        value, fail = either { do_send(meth, args, &blk) }
+        if should_do_block_execute(value, fail) then
+          r, fail = either { invoke_and_infer_block(meth, args) }
+          r || InvocationResult.new(fail)
         else
-          invocation_result
+          InvocationResult.new(value)
         end
       }
-      # TODO handle the warns            
-      v
+      # TODO handle the warns     
+      v       
     end
     
     private
@@ -47,8 +49,10 @@ module Accidentally
     end
     
     def invoke_and_infer_block m, args
-      blk = proc { |x| x }
-      do_send(m, args, &blk)
+      proc_body = "{ |x| x }"
+      blk = eval "proc #{proc_body}"
+      v = do_send(m, args, &blk)
+      InvocationResult.new(v, proc_body)
     end
   end
 end
