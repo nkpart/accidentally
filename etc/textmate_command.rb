@@ -1,16 +1,16 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-gem 'accidently'
+gem 'nkpart-accidently'
 require 'accidently'
-input = STDIN.read
-answers = eval(input)
+
+selection = ENV['TM_SELECTED_TEXT']
+answers = eval(selection)
 if !answers.empty?
-  puts "# #{input}"
+  puts "# #{selection}"
   puts answers.map { |a|
-    input.gsub(/accidently/, a)
+    selection.gsub(/accidently/, a)
   }.join("\n")
 else
-  puts $TM_SELECTED_TEXT + " # No match"
+  puts ENV['TM_SELECTED_TEXT'] + " # No match"
 end
-
