@@ -7,28 +7,23 @@ require 'accidentally/mad_hax'
 
 class Object
   def accidentally *args, &block
-    Accidentally::Proxy.new(self).with(*args, &block)
+    Accidentally::Proxy.new(self, args, block)
   end
 end
 
 module Accidentally
   VERSION = '0.0.2'
 
+  # syntactic sugar for Accidently.find_how 
   class Proxy
-    def initialize object
+    def initialize object, args, block
       @object = object
-      @args = []
-      @block = nil
+      @args = args
+      @block = block
     end
 
     def == result
-      MadHax.find_how @object, result, @args, &@block
-    end
-
-    def with *args, &block
-      @args.concat args
-      @block = block
-      self
+      Accidentally.find_how @object, result, @args, &@block
     end
   end
 end

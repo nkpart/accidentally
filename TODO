@@ -1,7 +1,5 @@
 * Make it work with UtilityBelt - this will require knowing which methods are patched in. At the moment, it will run all sorts of nasty 'equipped' methods (pastie, vi, emacs, mate).
 
-* Make it return the block used if a block is inferred. There's a failing spec in there for this.
-
 * Find a method which expects parameters even when we haven't supplied the arguments.
   * Would need to knock up our own arguments in the MethodInvoker...
 
@@ -10,3 +8,7 @@
 
 * Allow the user to specify a proc as a target, this will be used in the equality check:
   > [1].accidently == proc { |x| x =~ /"1"/ }
+
+
+
+* DONE Make it return the block used if a block is inferred. There's a failing spec in there for this.
